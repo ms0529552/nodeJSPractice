@@ -13,7 +13,12 @@ const notes = require('./notes.js');
 //4. Have removeNote log the title of the note to be moved
 //5. Test your work using : node app.js remove --title="some title"
 //
-
+//Goal: Refactor all functions
+//
+//1. If function is a method, use ES6 method definition syntax
+//2. Otherwise, use most concise arrow function possible
+//3. Test your work
+//
 
 yargs.command({
     command: 'add',
@@ -30,7 +35,7 @@ yargs.command({
             type: 'string'
         }
     },    
-    handler: function(argv){
+    handler(argv){
        notes.addNote(argv.title, argv.body)
     }
 })
@@ -45,8 +50,34 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function(argv){
+    handler(argv){
         notes.removeNote(argv.title);
+    }
+})
+
+yargs.command({
+    command: 'list',
+    describe: 'list all the notes',
+    builder:{
+     
+    },
+    handler(){
+        notes.listNotes();
+    }
+})
+yargs.command({
+    command: 'read',
+    describe: 'Search for note by title',
+    builder:{
+        title:{
+            describe: 'The title of the note needed to be serached',
+            demandOption: true,
+            type:'string'
+        }
+
+    },
+    handler(argv){
+        notes.readNote(argv.title);
     }
 })
 
