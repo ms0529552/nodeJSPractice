@@ -16,19 +16,31 @@ var weatherUrl = "http://api.weatherstack.com/";
 //Address -> Lat/Long -> Weather
 
 //
-//Goal:Print the lat/long for Los Angeles
+//Goal:Handle errors for geocoding request
 //
-//1. Fire off a new request to the URL explored in browser
-//2. Have the request module parse it as JSON
-//3. Print both the latitude and longtitude to the terminal
-//4. Test your work!
+//1. Setups an error handler for low-level errors
+//2. Test by disabling network request and running app
+//3. Setup error handling for no matching results
+//4. Test by altering the search term and running the app
 
 
-const mapUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoibXMwNTI5NTUyIiwiYSI6ImNsMHVmM3ZseTAxY3czZnA1cmUycnQ0azIifQ.AzbWY5vjU6uzz8t2RhtXuw&limit=1"
+
+const mapUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/12?access_token=pk.eyJ1IjoibXMwNTI5NTUyIiwiYSI6ImNsMHVmM3ZseTAxY3czZnA1cmUycnQ0azIifQ.AzbWY5vjU6uzz8t2RhtXuw&limit=1"
 
 request({url: mapUrl, json: true}, (error, response) => {
-    const lat = response.body.features[0].center[1];
-    const long = response.body.features[0].center[0];
-
-    console.log("The geocoded address is " + lat + ", " + long + "." );
+    
+    if (error)
+    {
+        console.log("Unable to connect to mapbox server!");
+    }
+    else if(response.body.message)
+    {
+        console.log("The search area doesn't exist!")
+    }
+    else
+    {
+        const lat = response.body.features[0].center[1];
+        const long = response.body.features[0].center[0];
+        console.log("The geocoded address is " + lat + ", " + long + "." );
+    }
 })
