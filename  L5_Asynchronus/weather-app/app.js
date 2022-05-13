@@ -3,15 +3,31 @@ const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast')
 
 
+//Goal: Use both destructuring and property shorthand in weather app
+//
+// 1. Use destructuring in app.js, forecast.js, and geocode.js
+// 2. Use property shorthand in forecast.js and geocode.js
+// 3. Test your work and ensure app still works
+
  
-geocode('Philadelphia New york', (error, data) => {
+geocode('Philadelphia New york', (error,{latitude, longitude, location}) => {
+    
+    if(error)
+    {
+        return console.log(error);
+    }
+    
+    
     console.log('Error', error);
-    console.log('Data', data);
+    //console.log('Data', data);
+
+    forecast(latitude, longitude, (error, forecastData) =>{
+        if(error){
+            return console.log(error);
+        }
+        console.log(location);
+        console.log('Data', forecastData);
+    })
 
 })
 
-
-forecast(37.8267, -122.4233, (error, data) =>{
-    console.log('Error', error);
-    console.log('Data', data);
-})
