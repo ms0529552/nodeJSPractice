@@ -2,6 +2,7 @@
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast')
 
+const address = process.argv[2];
 
 //Goal: Use both destructuring and property shorthand in weather app
 //
@@ -18,7 +19,7 @@ geocode('Philadelphia New york', (error,{latitude, longitude, location}) => {
     }
     
     
-    console.log('Error', error);
+    //console.log('Error', error);
     //console.log('Data', data);
 
     forecast(latitude, longitude, (error, forecastData) =>{
