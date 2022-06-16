@@ -1,14 +1,11 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 
-app.get('', (req, res) => {
-    res.send('Hello express!')
-})
+const publicDirPath = path.join(__dirname, '../public');
 
-app.get('/help', (req, res)=> {
-    res.send('Help page is here.')
-})
+app.use(express.static(publicDirPath));
 
 //
 //1st Goal: Setup two new routes
@@ -23,18 +20,42 @@ app.get('/help', (req, res)=> {
 //  - Object with forecast and location strings
 //3. Test your work by visiting both in the browser
 
+
+
 //====================================================================
 
-app.get('/about', (req, res) =>{
-    res.send('<h1>About us</h1>');
-});
+// app.get('', (req, res) => {
+//     res.send('Hello express!')
+// })
+
+// app.get('/help', (req, res)=> {
+//     res.send('Help page is here.')
+// })
+
+// app.get('/about', (req, res) =>{
+//     res.send('<h1>About us</h1>');
+// });
  
-app.get('/weather', (req, res) =>{
-    res.send({
-        forecast: 'It is snowing',
-        location: 'Philadelphia',
-    });
-});
+// app.get('/weather', (req, res) =>{
+//     res.send({
+//         forecast: 'It is snowing',
+//         location: 'Philadelphia',
+//     });
+// });
+
+//====================================================================
+
+//3rd Goal: 
+//1. Create a HTML page for about with "About" title.
+//2. Create a HTML page for help with "Help" title.
+//3. Remove the old route handlers for both.
+//4. Visit both in the browser yo test your work.
+
+//====================================================================
+
+
+
+
 
 //====================================================================
 
